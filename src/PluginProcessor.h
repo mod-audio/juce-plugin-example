@@ -21,8 +21,10 @@ public:
     using AudioProcessor::processBlock;
 
     //==============================================================================
+#ifndef JUCE_AUDIOPROCESSOR_NO_GUI
     juce::AudioProcessorEditor* createEditor() override;
     bool hasEditor() const override;
+#endif
 
     //==============================================================================
     const juce::String getName() const override;

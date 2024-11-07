@@ -1,5 +1,7 @@
 #include "PluginProcessor.h"
+#ifndef JUCE_AUDIOPROCESSOR_NO_GUI
 #include "PluginEditor.h"
+#endif
 
 //==============================================================================
 AudioPluginAudioProcessor::AudioPluginAudioProcessor()
@@ -133,6 +135,7 @@ void AudioPluginAudioProcessor::processBlock (juce::AudioBuffer<float>& buffer,
 }
 
 //==============================================================================
+#ifndef JUCE_AUDIOPROCESSOR_NO_GUI
 bool AudioPluginAudioProcessor::hasEditor() const
 {
     return true; // (change this to false if you choose to not supply an editor)
@@ -142,6 +145,7 @@ juce::AudioProcessorEditor* AudioPluginAudioProcessor::createEditor()
 {
     return new AudioPluginAudioProcessorEditor (*this);
 }
+#endif
 
 //==============================================================================
 void AudioPluginAudioProcessor::getStateInformation (juce::MemoryBlock& destData)

@@ -31,7 +31,13 @@ project(${PROJECT}
 # tell this project that it depends on the installed copy of JUCE. If you've included JUCE directly in your source tree
 # (perhaps as a submodule), you'll need to tell CMake to include that subdirectory as part of the build.
 
-add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/JUCE)
+# In here we use a specific JUCE version if doing MOD builds, otherwise we use our local JUCE copy.
+
+if(JUCE_MOD_BUILD)
+    find_package(JUCE-7.0.9 REQUIRED)
+else()
+    add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/JUCE)
+endif()
 
 # Set which plugin formats to build for. Some formats might require additional arguments to be passed in the
 # `juce_add_plugin` call below.
@@ -101,6 +107,6 @@ target_link_libraries(${PROJECT}
 
 target_sources(${PROJECT}
     PRIVATE
-        src/PluginEditor.cpp
+        $<$<NOT:$<BOOL:${JUCE_AUDIOPROCESSOR_NO_GUI}>>:src/PluginEditor.cpp>
         src/PluginProcessor.cpp
 )
