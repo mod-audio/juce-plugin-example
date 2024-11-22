@@ -34,7 +34,7 @@ project(${PROJECT}
 # In here we use a specific JUCE version if doing MOD builds, otherwise we use our local JUCE copy.
 
 if(JUCE_MOD_BUILD)
-    find_package(JUCE-7.0.9 REQUIRED)
+    find_package(JUCE-8.0.4 REQUIRED)
 else()
     add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/JUCE)
 endif()
